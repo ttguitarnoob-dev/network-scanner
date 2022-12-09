@@ -4,20 +4,23 @@ import sys
 import socket
 from datetime import datetime
 
-# Define Target
 
-if len(sys.argv) == 2:
-    target = socket.gethostbyname(sys.argv[1])
-    
-else:
-    print("You didn't provide a target, dummy")
-    print("Syntax: python3 scanner.py <ip or hostname>")
-
-# if you want to run it from something other than linux terminal
-# target = '10.24.24.1'
 
 #Scan ports
-def scan_ports():
+def scan_ports(target_name):
+    target = target_name
+    print(target)
+
+    # Define Target
+    if len(target_name) == 2:
+        target = socket.gethostbyname(target_name[1])
+        
+    else:
+        print("You didn't provide a target, dummy")
+        print("Syntax: python3 scanner.py <ip or hostname>")
+
+    # if you want to run it from something other than linux terminal
+    # target = '10.24.24.1'
     
     #Banner
     print('-' * 50)
@@ -48,3 +51,5 @@ def scan_ports():
     except socket.error:
         print("Couldn't connect to the server.")
         sys.exit()
+
+scan_ports(sys.argv)
